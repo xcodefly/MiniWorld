@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraController : MonoBehaviour
+{
+    public Transform target;        // The target (character) to follow
+    public float distance = 5.0f;
+    public float distanceSmooth;   // Distance from the character
+    [SerializeField]float smoothSpeed =2;
+    public float zoomSpeed = 2.0f;  // Speed of zooming
+    // Speed of camera rotation
+   
+    [SerializeField] Vector2 mouseDownPostion,mouseDelta;
+
+
+  
+    [SerializeField] float rotationAngle,pitchAngle;
+    [SerializeField]Quaternion rotationSmooth;
+    
+  
+    private void LateUpdate()
+    {
+        if (target == null)
+            return;
+
+        // Calculate the desired position for the camera
+       
+        float desiredRotationAngle = target.eulerAngles.y;
+
+        // Calculate zoom input
+        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+        distance -= zoomInput * zoomSpeed * Time.deltaTime;
+        distanceSmooth=Mathf.Lerp(distanceSmooth,distance,Time.deltaTime *smoothSpeed);
+
+        // Calculate rotation input
+      
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            mouseDownPostion=Input.mousePosition;
+        }
+        if(Input.GetMouseButton(1))
+        {
+            mouseDelta=mouseDownPostion-(Vector2)Input.mousePosition;
+            rotationAngle=rotationAngle-mouseDelta.x*0.2f;
+            pitchAngle=pitchAngle+mouseDelta.y*0.1f;
+            pitchAngle=Mathf.Max(10,Mathf.Min(60,pitchAngle));
+            mouseDownPostion=Input.mousePosition;
+        }
+        
+
+
+        // Calculate desired position
+        Quaternion rotation = Quaternion.Euler(pitchAngle, rotationAngle+target.eulerAngles.y, 0) ;
+
+        rotationSmooth=Quaternion.Lerp(rotationSmooth,rotation  ,Time.deltaTime *smoothSpeed);
+        Vector3 offset = new Vector3(0, 0, -distanceSmooth);
+        transform.position = target.position + rotationSmooth * offset;
+
+        // Smoothly move the camera
+      //  transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+
+        // Make the camera look at the target
+        transform.LookAt(target);
+    }
+}
