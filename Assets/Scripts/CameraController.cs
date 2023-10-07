@@ -11,13 +11,15 @@ public class CameraController : MonoBehaviour
     public float zoomSpeed = 2.0f;  // Speed of zooming
     // Speed of camera rotation
    
-    [SerializeField] Vector2 mouseDownPostion,mouseDelta;
-
-
-  
+    [SerializeField] Vector2 mouseDownPostion,mouseDelta;  
     [SerializeField] float rotationAngle,pitchAngle;
     [SerializeField]Quaternion rotationSmooth;
-    
+    private void Start() {
+        rotationAngle=  PlayerPrefs.GetFloat("Rotation", 0);
+        pitchAngle=  PlayerPrefs.GetFloat("Angle", 20);
+        distance=  PlayerPrefs.GetFloat("Distance", 10);
+        distanceSmooth=distance;
+    }
   
     private void LateUpdate()
     {
@@ -25,16 +27,20 @@ public class CameraController : MonoBehaviour
             return;
 
         // Calculate the desired position for the camera
-       
+        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+        distance -= zoomInput * zoomSpeed * Time.deltaTime;
         float desiredRotationAngle = target.eulerAngles.y;
 
         // Calculate zoom input
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-        distance -= zoomInput * zoomSpeed * Time.deltaTime;
+       
         distanceSmooth=Mathf.Lerp(distanceSmooth,distance,Time.deltaTime *smoothSpeed);
 
         // Calculate rotation input
-      
+        if(Input.mouseScrollDelta.y!=0)
+        {
+            PlayerPrefs.SetFloat("Distance", distance);
+           
+        }
 
         if(Input.GetMouseButtonDown(1))
         {
@@ -48,18 +54,19 @@ public class CameraController : MonoBehaviour
             pitchAngle=Mathf.Max(10,Mathf.Min(60,pitchAngle));
             mouseDownPostion=Input.mousePosition;
         }
-        
-
-
+        if(Input.GetMouseButtonUp(1))
+        {
+            PlayerPrefs.SetFloat("Rotation", rotationAngle);
+            PlayerPrefs.SetFloat("Angle", pitchAngle);        
+        }  
         // Calculate desired position
         Quaternion rotation = Quaternion.Euler(pitchAngle, rotationAngle+target.eulerAngles.y, 0) ;
-
         rotationSmooth=Quaternion.Lerp(rotationSmooth,rotation  ,Time.deltaTime *smoothSpeed);
         Vector3 offset = new Vector3(0, 0, -distanceSmooth);
         transform.position = target.position + rotationSmooth * offset;
 
         // Smoothly move the camera
-      //  transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        //  transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
 
         // Make the camera look at the target
         transform.LookAt(target);
