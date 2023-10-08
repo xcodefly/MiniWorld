@@ -18,7 +18,7 @@ public class VehicleController : MonoBehaviour
     [SerializeField] float torque,brakeTorque;
     [SerializeField] Transform cog;
     [SerializeField] Rigidbody rb;
-    [SerializeField] Movement movement;
+    [SerializeField] PlayerInput movement;
     
     public float engineRPM;
     
@@ -71,7 +71,7 @@ public class VehicleController : MonoBehaviour
             gear=gear*-1;
             OnGearChange.Invoke(gear);
         }
-        if(movement!=null)
+       /* if(movement!=null)
         {
             if(movement.vertical>0)
             {
@@ -92,7 +92,7 @@ public class VehicleController : MonoBehaviour
                 brakes=false;
                 OnBrakeStatus?.Invoke(brakes);
             }           
-        }
+        }*/
         airspeed=Vector3.Dot(rb.velocity,this.transform.forward);
         ratio=wheelSpeed/airspeed;
     }
@@ -102,7 +102,7 @@ public class VehicleController : MonoBehaviour
         {
             foreach(WheelCollider wheel in steeringWheels)
             {
-                wheel.steerAngle=movement.horizontal*maxSteerAngle;
+          //      wheel.steerAngle=movement.horizontal*maxSteerAngle;
             }
             engineRPM = 0;
             if(running)
