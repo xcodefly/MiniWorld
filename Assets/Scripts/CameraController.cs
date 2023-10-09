@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
 
         // Calculate the desired position for the camera
         float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-        distance -= zoomInput * zoomSpeed * Time.deltaTime;
+        distance -= zoomInput * zoomSpeed * Time.fixedDeltaTime;
         float desiredRotationAngle = target.eulerAngles.y;
 
         // Calculate zoom input

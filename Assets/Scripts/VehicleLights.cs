@@ -27,11 +27,11 @@ public class VehicleLights : MonoBehaviour
         VehicleController.OnBrakeStatus -= BrakeLights;
     }
 
-    void MarkerLights(bool _status)
+    void MarkerLights(LightStatus _status)
     {
-        if (_status)
+        if (_status>0)
         {
-            marker = 1;
+            marker = 0.5f;
         }
         else
         {

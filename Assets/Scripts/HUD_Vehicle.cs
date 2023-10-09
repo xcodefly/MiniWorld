@@ -10,9 +10,18 @@ public class HUD_Vehicle : MonoBehaviour
     [SerializeField]VehicleController vehicle;
     [SerializeField]Text speed_T,gear_T;
     [SerializeField] bool airspeed;
+    [Header ("RPM")]
+    [SerializeField] RectTransform rpmNeedle;
+    [SerializeField] float ratio;
+    [SerializeField] float MaxAngle;
+    [SerializeField] float rpmsmooth;
+    [SerializeField] PowerTrain rpm;
+
     void Awake()
     {
-        VehicleController.OnGearChange+=UpdateGear;
+        PowerTrain.OnGearChange += UpdateGear;
+
+        airspeed = true;
     }
     private void Start()
     {
@@ -20,14 +29,18 @@ public class HUD_Vehicle : MonoBehaviour
        
     }
     private void OnDisable() {
-        VehicleController.OnGearChange-=UpdateGear;
+        PowerTrain.OnGearChange -= UpdateGear;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-             
+        if(rpm!=null)
+        {
+            rpmsmooth = Mathf.Lerp(rpmsmooth, rpm.rpmRatio, Time.deltaTime *5);
+            rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);
+        }
+                  
     }
 
     IEnumerator UpdateSpeed()
@@ -40,22 +53,14 @@ public class HUD_Vehicle : MonoBehaviour
             }
             else
             {
-                speed_T.text = (Mathf.Abs(vehicle.wheelSpeed) * 3.6f).ToString("0");               
+            //    speed_T.text = (Mathf.Abs(vehicle.wheelSpeed) * 3.6f).ToString("0");               
             }
             yield return new WaitForSeconds(0.1f);
         }
     }
     void UpdateGear(int _gear)
     {
-        if(_gear>=0)
-        {
-            gear_T.text="D";
-            
-            
-        }else
-        {
-             gear_T.text="R";
-        }
+        gear_T.text=_gear.ToString();
        
     }
 }

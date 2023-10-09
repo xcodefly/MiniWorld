@@ -11,12 +11,13 @@ public class VehiclEngineSound : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] AudioClip[] engineClips;   
     [SerializeField] AudioSource engineSound;
-    [SerializeField] VehicleController controller;
+    [SerializeField] PowerTrain powerTrain;
+   
     
     void Start()
     {
         VehicleAction.OnVehicleStart += StartVechileSound;
-        controller=GetComponent<VehicleController>();
+        powerTrain=GetComponent<PowerTrain>();
     }
     private void OnDisable()
     {
@@ -25,8 +26,8 @@ public class VehiclEngineSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        engineSound.volume = Mathf.Lerp(0.3f, 1, controller.throttle);
-        engineSound.pitch = Mathf.Lerp(0.9f, 1.9f, controller.engineRPM / 3000);
+        engineSound.volume = Mathf.Lerp(0.3f, 1, PlayerInput.instance.throttle);
+        engineSound.pitch = Mathf.Lerp(0.9f, 1.6f, powerTrain.rpmRatio );
 
     }
     void StartVechileSound(bool _status)
