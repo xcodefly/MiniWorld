@@ -9,7 +9,7 @@ public class Engine : MonoBehaviour
     public float maxRPM;
     public float idleRPM;
     public float setRPM;
-    public float allowedSlip;
+    public float allowedRPM;
     [Header ("RPM control PID")]
     public float rpm;  
     public PID engineController;
@@ -21,15 +21,17 @@ public class Engine : MonoBehaviour
     public float engineDrag;
 
     public float w;
-    public VehicleController vehicle;
+    public PowerTrain powerTrain;
     public AnimationCurve slipCurve;
+    public float maxSlip;
     private void Awake()
     {
         VehicleAction.OnVehicleStart += StartVehicle;
+        maxSlip=4000;
     }
     void Start()
     {
-        vehicle = GetComponent<VehicleController>();
+        powerTrain = GetComponent<PowerTrain>();
         movementInertia = flywheelMass * radius * radius;
     }
 
@@ -50,6 +52,13 @@ public class Engine : MonoBehaviour
     {
 
         setRPM = idleRPM + PlayerInput.instance.throttle * (maxRPM - idleRPM);
+        allowedRPM =powerTrain.engineRPM +  slipCurve.Evaluate(powerTrain.engineRPM/maxRPM)*maxSlip;
+       
+        if(powerTrain.gear!=0)
+        {
+
+            setRPM=Mathf.Min(allowedRPM,Mathf.Max(powerTrain.engineRPM*0.85f,setRPM));
+        }
         engineDrag = engineController.Update(setRPM, rpm , Time.deltaTime);
 
         w = w + engineDrag * Time.deltaTime;

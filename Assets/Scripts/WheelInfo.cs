@@ -35,7 +35,7 @@ public class WheelInfo : MonoBehaviour
         wheel.GetGroundHit(out hit);
         if(abs)
         {
-            wheel.brakeTorque = _brake * (1 + hit.forwardSlip);
+            wheel.brakeTorque = _brake * (1+brakeRatio + hit.forwardSlip);
         }else
         {
             wheel.brakeTorque = _brake;

@@ -54,9 +54,7 @@ public class PowerTrain : MonoBehaviour
             }
             UpdateGear();
         }
-
-
-        engineRPM = (vehicleController.wheelRPM ) * multiplier + 750;
+        engineRPM =    Mathf.Lerp(engineRPM,      (vehicleController.wheelRPM ) * multiplier,Time.deltaTime*25) ;
         rpmRatio = engineRPM / RPMLimit;
         wheelTorque = (playerInput.throttle * engineTorque * engineCurve.Evaluate(rpmRatio) + engineBrake.Evaluate(rpmRatio)*engiebrakeTroque ) * multiplier;
 

@@ -213,7 +213,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelMesh: {fileID: -8679921383154817045, guid: f88918498a5de754a8f75c036114e782,
     type: 3}
-  brakeRatio: 0.7
+  brakeRatio: -0.31
   abs: 1
 --- !u!4 &91309555 stripped
 Transform:
@@ -568,7 +568,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelMesh: {fileID: -8679921383154817045, guid: f88918498a5de754a8f75c036114e782,
     type: 3}
-  brakeRatio: 1
+  brakeRatio: -0.05
   abs: 1
 --- !u!1 &410087039
 GameObject:
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelMesh: {fileID: -8679921383154817045, guid: f88918498a5de754a8f75c036114e782,
     type: 3}
-  brakeRatio: 0.7
+  brakeRatio: -0.31
   abs: 1
 --- !u!1 &915766281
 GameObject:
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   wheel: {fileID: 0}
   wheelMesh: {fileID: -8679921383154817045, guid: f88918498a5de754a8f75c036114e782,
     type: 3}
-  brakeRatio: 1
+  brakeRatio: -0.05
   abs: 1
 --- !u!4 &971119571 stripped
 Transform:
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineStatus: 0
-  running: 0
+  running: 1
   stauts_Light: 0
 --- !u!114 &2123871040
 MonoBehaviour:
@@ -2577,19 +2577,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db635f55c8b1914280c43d37caf666a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engineTorque: 225
-  engiebrakeTroque: -20
+  engineTorque: 250
+  engiebrakeTroque: -15
   wheelTorque: 0
   RPMLimit: 7000
   engineRPM: 0
   gearRatio:
   - 0
-  - 3
-  - 2.2
-  - 1.7
-  - 1.2
+  - 4
+  - 2.8
+  - 2
+  - 1.4
   - 0.9
-  finalGearRatio: 3
+  finalGearRatio: 2.5
   reversRatio: -3.8
   engineCurve:
     serializedVersion: 2
@@ -2704,7 +2704,7 @@ MonoBehaviour:
   maxRPM: 7000
   idleRPM: 0
   setRPM: 0
-  allowedSlip: 0
+  allowedRPM: 0
   rpm: 0
   engineController:
     pFactor: 0.3
@@ -2715,13 +2715,41 @@ MonoBehaviour:
   movementInertia: 0
   engineDrag: 0
   w: 80
-  vehicle: {fileID: 0}
+  powerTrain: {fileID: 0}
   slipCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.038210485
+      value: 0.98501635
+      inSlope: -4.2017646
+      outSlope: -4.2017646
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.14295748
+    - serializedVersion: 3
+      time: 0.25056902
+      value: 0.25672194
+      inSlope: -1.2604371
+      outSlope: -1.2604371
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0840982
+      value: -0.0077134315
+      inSlope: 0.070319265
+      outSlope: 0.070319265
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4802105
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maxSlip: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
