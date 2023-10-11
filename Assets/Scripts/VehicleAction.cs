@@ -26,15 +26,14 @@ public class VehicleAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(running && engineStatus == EngineStatus.Off)
+        
+
+
+        if (Input.GetButtonDown("Engine"))
         {
+            running = !running; 
             OnVehicleStart?.Invoke(running);
-            engineStatus = EngineStatus.Running;
-        }
-        if (!running && engineStatus == EngineStatus.Running)
-        {
-            OnVehicleStart?.Invoke(running);
-            engineStatus = EngineStatus.Off;
+
         }
         if(Input.GetButtonDown("Light"))
         {
@@ -46,9 +45,7 @@ public class VehicleAction : MonoBehaviour
             {
                 temp = 0;
                 stauts_Light = (LightStatus)temp;
-            }
-
-            
+            }            
             OnVehicleLight?.Invoke(stauts_Light); 
         
 

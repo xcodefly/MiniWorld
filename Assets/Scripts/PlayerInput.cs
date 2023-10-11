@@ -46,7 +46,7 @@ public class PlayerInput : MonoBehaviour
                 brake=-Input.GetAxis("Vertical");
                 throttle = 0;
             }
-            steer = Input.GetAxis("Horizontal");
+            steer = Mathf.Lerp(steer, Input.GetAxis("Horizontal"),Time.deltaTime*3);
         }
         else
         {

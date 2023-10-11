@@ -178,8 +178,8 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 0.8
   m_ForwardFriction:
-    m_ExtremumSlip: 0.1
-    m_ExtremumValue: 1.3
+    m_ExtremumSlip: 0.15
+    m_ExtremumValue: 1.2
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
     m_Stiffness: 1
@@ -525,7 +525,7 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.32
   m_SuspensionSpring:
-    spring: 35000
+    spring: 30000
     damper: 1500
     targetPosition: 0.6
   m_SuspensionDistance: 0.18
@@ -533,7 +533,7 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 0.8
   m_ForwardFriction:
-    m_ExtremumSlip: 0.1
+    m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.8
@@ -999,8 +999,8 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 0.8
   m_ForwardFriction:
-    m_ExtremumSlip: 0.1
-    m_ExtremumValue: 1.3
+    m_ExtremumSlip: 0.15
+    m_ExtremumValue: 1.2
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
     m_Stiffness: 1
@@ -1081,7 +1081,7 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.32
   m_SuspensionSpring:
-    spring: 35000
+    spring: 30000
     damper: 1500
     targetPosition: 0.6
   m_SuspensionDistance: 0.18
@@ -1089,7 +1089,7 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 0.8
   m_ForwardFriction:
-    m_ExtremumSlip: 0.1
+    m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.8
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineStatus: 0
-  running: 1
+  running: 0
   stauts_Light: 0
 --- !u!114 &2123871040
 MonoBehaviour:
@@ -2578,7 +2578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineTorque: 250
-  engiebrakeTroque: -15
   wheelTorque: 0
   RPMLimit: 7000
   engineRPM: 0
@@ -2638,48 +2637,6 @@ MonoBehaviour:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.105355166
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  engineBrake:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0022354126
-      value: -0.09857178
-      inSlope: 0.31096548
-      outSlope: 0.31096548
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.42584443
-    - serializedVersion: 3
-      time: 0.09999728
-      value: 0.0008501187
-      inSlope: 1.1675705
-      outSlope: 1.1675705
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.20830597
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.43763816
-      value: 0.15693012
-      inSlope: 0.32316804
-      outSlope: 0.32316804
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.14828725
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.2026978
-      value: 0.552269
-      inSlope: 0.7901038
-      outSlope: 0.7901038
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.052611414
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

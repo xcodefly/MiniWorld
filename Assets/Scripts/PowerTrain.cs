@@ -10,8 +10,7 @@ public class PowerTrain : MonoBehaviour
     
 
     // Varaibles.
-    public float engineTorque;
-    public float engiebrakeTroque;
+    public float engineTorque;    
     public float wheelTorque;
     public float RPMLimit;
     public float engineRPM;
@@ -19,7 +18,7 @@ public class PowerTrain : MonoBehaviour
     public float finalGearRatio;
     public float reversRatio;
     public AnimationCurve engineCurve;
-    public AnimationCurve engineBrake;
+ 
     public int gear;
 
     public PlayerInput playerInput;
@@ -56,7 +55,7 @@ public class PowerTrain : MonoBehaviour
         }
         engineRPM =    Mathf.Lerp(engineRPM,      (vehicleController.wheelRPM ) * multiplier,Time.deltaTime*25) ;
         rpmRatio = engineRPM / RPMLimit;
-        wheelTorque = (playerInput.throttle * engineTorque * engineCurve.Evaluate(rpmRatio) + engineBrake.Evaluate(rpmRatio)*engiebrakeTroque ) * multiplier;
+        wheelTorque = playerInput.throttle * engineTorque * engineCurve.Evaluate(rpmRatio) * multiplier;
 
         vehicleController.torque = wheelTorque;
     }
