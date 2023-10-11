@@ -20,7 +20,7 @@ public class VehicleAction : MonoBehaviour
 
     void Start()
     {
-        running = true;
+       
     }
 
     // Update is called once per frame

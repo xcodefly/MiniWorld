@@ -15,7 +15,8 @@ public class HUD_Vehicle : MonoBehaviour
     [SerializeField] float ratio;
     [SerializeField] float MaxAngle;
     [SerializeField] float rpmsmooth;
-    [SerializeField] PowerTrain rpm;
+    [SerializeField] Engine engine;
+
 
     void Awake()
     {
@@ -35,9 +36,9 @@ public class HUD_Vehicle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rpm!=null)
+        if(engine!=null)
         {
-            rpmsmooth = Mathf.Lerp(rpmsmooth, rpm.rpmRatio, Time.deltaTime *5);
+            rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpm/engine.maxRPM, Time.deltaTime *5);
             rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);
         }
                   

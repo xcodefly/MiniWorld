@@ -15,18 +15,18 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  m_FogColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.31132078, g: 0.24106288, b: 0.17768781, a: 1}
-  m_AmbientEquatorColor: {r: 0.5, g: 0.47756246, b: 0.4740566, a: 1}
-  m_AmbientGroundColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  m_AmbientIntensity: 0.65
-  m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_AmbientSkyColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+  m_AmbientEquatorColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  m_AmbientGroundColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  m_AmbientIntensity: 0.93
+  m_AmbientMode: 1
+  m_SubtractiveShadowColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c4048775ef680284287bac59233431e7, type: 2}
   m_HaloStrength: 0.112
   m_FlareStrength: 0.806
   m_FlareFadeSpeed: 2
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.196
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.035335623, g: 0.044239964, b: 0.060156878, a: 0.196}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.196}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -600,7 +600,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.9
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -609,7 +609,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.732
+    m_Strength: 0.912
     m_Bias: 0
     m_NormalBias: 0
     m_NearPlane: 0.1
@@ -642,8 +642,8 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0
-  m_ColorTemperature: 5000
+  m_BounceIntensity: 1
+  m_ColorTemperature: 5214
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -658,13 +658,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.16286975, y: -0.5838266, z: 0.12095779, w: -0.7861229}
   m_LocalPosition: {x: 9.105906, y: 1.6989266, z: -32.037357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2087391963}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 23.41, y: -286.8, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 0.75
+  weight: 0.679
   sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!4 &832575519
 Transform:
@@ -1420,7 +1420,7 @@ MonoBehaviour:
   ratio: 0
   MaxAngle: -105
   rpmsmooth: 0
-  rpm: {fileID: 2123871043}
+  engine: {fileID: 2123871046}
 --- !u!114 &1247555190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,6 +2193,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2123871043}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a54e9ceb9fbd83641ba98f4c76f357fd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2123871046}
   m_SourcePrefab: {fileID: 100100000, guid: a54e9ceb9fbd83641ba98f4c76f357fd, type: 3}
 --- !u!1 &2087391962
 GameObject:
@@ -2527,7 +2531,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5e2bca934dac3d243994b05131eb71f4, type: 3}
   - {fileID: 8300000, guid: 05a6a9dd15469dd41a4480a13d5eb8c9, type: 3}
   engineSound: {fileID: 2123871035}
-  powerTrain: {fileID: 0}
+  engine: {fileID: 0}
 --- !u!114 &2123871039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,8 +2595,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0008621216
-      value: 0.45898438
+      time: 0.0017242432
+      value: 0.5938263
       inSlope: 0.5058619
       outSlope: 0.5058619
       tangentMode: 0
@@ -2600,8 +2604,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.15984564
     - serializedVersion: 3
-      time: 0.3889594
-      value: 0.68017346
+      time: 0.40278387
+      value: 0.7685353
       inSlope: 0.30507842
       outSlope: 0.30507842
       tangentMode: 0
@@ -2610,7 +2614,7 @@ MonoBehaviour:
       outWeight: 0.10120504
     - serializedVersion: 3
       time: 0.81886077
-      value: 0.80590504
+      value: 0.79905915
       inSlope: 0.004575019
       outSlope: 0.004575019
       tangentMode: 0
@@ -2685,6 +2689,39 @@ MonoBehaviour:
   vehicleController: {fileID: 0}
   rpmRatio: 0
   multiplier: 0
+--- !u!114 &2123871046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123871026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e26de62e57d6af47a121070900fa4ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRPM: 7000
+  idleRPM: 0
+  setRPM: 0
+  allowedSlip: 0
+  rpm: 0
+  engineController:
+    pFactor: 0.3
+    iFactor: 0.015
+    dFactor: 0.03
+  flywheelMass: 30
+  radius: 0.3
+  movementInertia: 0
+  engineDrag: 0
+  w: 80
+  vehicle: {fileID: 0}
+  slipCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
