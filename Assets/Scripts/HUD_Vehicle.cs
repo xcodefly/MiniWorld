@@ -22,6 +22,7 @@ public class HUD_Vehicle : MonoBehaviour
     [SerializeField] float coolantSweepAngle;
     [SerializeField] RectTransform coolantNeedle;
     [SerializeField] float fuel;
+    [SerializeField] Slider fuelGauge;
 
 
     void Awake()
