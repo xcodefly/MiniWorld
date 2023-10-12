@@ -17,6 +17,12 @@ public class HUD_Vehicle : MonoBehaviour
     [SerializeField] float rpmsmooth;
     [SerializeField] Engine engine;
 
+    [Header ("Engine Parameters")]
+    [SerializeField] float coolant;
+    [SerializeField] float coolantSweepAngle;
+    [SerializeField] RectTransform coolantNeedle;
+    [SerializeField] float fuel;
+
 
     void Awake()
     {
@@ -44,6 +50,7 @@ public class HUD_Vehicle : MonoBehaviour
             }
            
             rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);
+            coolantNeedle.localEulerAngles=new Vector3(0, 0, coolant * coolantSweepAngle);
         }
                   
     }
