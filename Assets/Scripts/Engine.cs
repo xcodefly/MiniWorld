@@ -52,8 +52,7 @@ public class Engine : MonoBehaviour
     {
 
         setRPM = idleRPM + PlayerInput.instance.throttle * (maxRPM - idleRPM);
-        allowedRPM =powerTrain.engineRPM +  slipCurve.Evaluate(powerTrain.engineRPM/maxRPM)*maxSlip;
-       
+        allowedRPM =powerTrain.engineRPM +  slipCurve.Evaluate(powerTrain.engineRPM/maxRPM)*maxSlip;       
         if(powerTrain.gear!=0)
         {
 

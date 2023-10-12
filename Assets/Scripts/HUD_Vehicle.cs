@@ -9,7 +9,7 @@ public class HUD_Vehicle : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]VehicleController vehicle;
     [SerializeField]Text speed_T,gear_T;
-    [SerializeField] bool airspeed;
+    [SerializeField] bool testMode;
     [Header ("RPM")]
     [SerializeField] RectTransform rpmNeedle;
     [SerializeField] float ratio;
@@ -22,7 +22,7 @@ public class HUD_Vehicle : MonoBehaviour
     {
         PowerTrain.OnGearChange += UpdateGear;
 
-        airspeed = true;
+        testMode = false;
     }
     private void Start()
     {
@@ -38,7 +38,11 @@ public class HUD_Vehicle : MonoBehaviour
     {
         if(engine!=null)
         {
-            rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpm/engine.maxRPM, Time.deltaTime *5);
+            if(!testMode)
+            {
+                rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpm / engine.maxRPM, Time.deltaTime * 5);
+            }
+           
             rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);
         }
                   
@@ -48,14 +52,7 @@ public class HUD_Vehicle : MonoBehaviour
     {
         while(true)
         {
-            if(airspeed)
-            {
-                speed_T.text = (Mathf.Abs(vehicle.airspeed)*3.6f).ToString("0");
-            }
-            else
-            {
-            //    speed_T.text = (Mathf.Abs(vehicle.wheelSpeed) * 3.6f).ToString("0");               
-            }
+            speed_T.text = (Mathf.Abs(vehicle.airspeed)*3.6f).ToString("0");
             yield return new WaitForSeconds(0.1f);
         }
     }
