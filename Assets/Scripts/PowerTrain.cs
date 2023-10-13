@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+[System.Serializable]
+public class Gear
+{
+    public float speedMultiplier, torqueMultiplier;
 
+}
 public class PowerTrain : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -12,23 +17,21 @@ public class PowerTrain : MonoBehaviour
     // Varaibles.
     public float engineTorque;    
     public float wheelTorque;
-    public float RPMLimit;
-    public float engineRPM;
-    public float[] gearRatio;
-    public float finalGearRatio;
-    public float reversRatio;
-    public AnimationCurve engineCurve;
- 
-    public int gear;
 
+    public Gear[] gears;
+    public float finalGearRatio;
+    public float reversRatio;  
+    public int gear;
     public PlayerInput playerInput;
     public VehicleController vehicleController;
-    public float rpmRatio;
-    public float multiplier;
+    public float engineRPM;
+    
+    public float torqueMultiplier,speedMultiplier;
     
     void Start()
     {
         vehicleController=GetComponent<VehicleController> ();
+        engineTorque = 0;
 
     }
 
@@ -38,7 +41,7 @@ public class PowerTrain : MonoBehaviour
         
         if(Input.GetButtonDown("GearUp"))
         {
-            if(gear+1<gearRatio.Length)
+            if(gear+1<gears.Length)
             {
                 gear++;
             }
@@ -53,22 +56,25 @@ public class PowerTrain : MonoBehaviour
             }
             UpdateGear();
         }
-        engineRPM =    Mathf.Lerp(engineRPM,      (vehicleController.wheelRPM ) * multiplier,Time.deltaTime*25) ;
-        rpmRatio = engineRPM / RPMLimit;
-        wheelTorque = playerInput.throttle * engineTorque * engineCurve.Evaluate(rpmRatio) * multiplier;
-
-        vehicleController.torque = wheelTorque;
+        
     }
 
+    private void FixedUpdate()
+    {
+        engineRPM = vehicleController.wheelRPM * speedMultiplier;
+        wheelTorque = engineTorque * torqueMultiplier;
+        vehicleController.torque = wheelTorque;
+    }
     public void UpdateGear()
     {
         if (gear >= 0)
         {
-            multiplier = gearRatio[gear] * finalGearRatio;
+            torqueMultiplier = gears[gear].torqueMultiplier * finalGearRatio;
+            speedMultiplier = gears[gear].speedMultiplier * finalGearRatio;
         }
         else
         {
-            multiplier = reversRatio * finalGearRatio;
+            
         }
         OnGearChange?.Invoke(gear);
     }

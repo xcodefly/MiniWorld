@@ -13,7 +13,7 @@ public class WheelInfo : MonoBehaviour
     [SerializeField] bool abs;
     
     
-    void Start()
+    void Awake()
     {
         wheel=GetComponent<WheelCollider>();
         wheelMesh = transform.GetChild(0);

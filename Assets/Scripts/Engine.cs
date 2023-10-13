@@ -11,33 +11,29 @@ public class Engine : MonoBehaviour
 
     public float maxRPM;
     public float idleRPM;
-    public float setRPM;
-    public float allowedRPM;
-    [Header("RPM control PID")]
-    public float rpm;
-    public PID engineController;
+
+   
+   
 
     [Header("Engine Parameters")]
-    public float engineDrag;
-    public float w;
     public PowerTrain powerTrain;
     public AnimationCurve slipCurve;
+    public AnimationCurve engineTorque;
+    public float slipValue;
+    public float slipVelocity;
     public float maxSlip;
 
-
-
-
     [Header("Speed Control")]
-
     public PID idleManager;
 
     [Header("Theromodynamic")]
     public float maxTorque;
     public float torque,idleTorque;
     public float a;
-    public float rpmT;
+    public float rpm;
     public float targetRPMT;
-    public float angularVelocity;
+    public float engineVelocity;
+    public float powerTrainVelocity;
     public float i;
     public float workdone;
     
@@ -50,7 +46,7 @@ public class Engine : MonoBehaviour
     private void Awake()
     {
         VehicleAction.OnVehicleStart += StartVehicle;
-        maxSlip=4000;
+        maxSlip=200;
         i = mass * radius * radius*0.5f;
     }
     void Start()
@@ -61,7 +57,7 @@ public class Engine : MonoBehaviour
     {
         if(_status )
         {
-            idleRPM = 750;
+            idleRPM = 850;
             eDrag = 300;
             maxTorque = 300;
         }
@@ -74,50 +70,49 @@ public class Engine : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-        setRPM = idleRPM + PlayerInput.instance.throttle * (maxRPM - idleRPM);
-        allowedRPM =powerTrain.engineRPM +  slipCurve.Evaluate(powerTrain.engineRPM/maxRPM)*maxSlip;       
-        if(powerTrain.gear!=0)
-        {
-            setRPM=Mathf.Min(allowedRPM,Mathf.Max(powerTrain.engineRPM*0.85f,setRPM));
-        }
-        engineDrag = engineController.Update(setRPM, rpm , Time.deltaTime);
-        w = w + engineDrag * Time.deltaTime;
-        rpm = w * 60 / (2 * Mathf.PI);
-        // Simulation.
-        // 
-
+    void FixedUpdate()
+    {   // Simulation.
         // v = u+at;
         // v2- u2= 2as;
         
-        idleTorque =Mathf.Max(0, idleManager.Update(idleRPM, rpmT, Time.deltaTime));
         torque = PlayerInput.instance.throttle * maxTorque;
-        
-        torque = torque + idleTorque;
-        
-        if(rpmT>maxRPM)
+             
+        if(rpm>maxRPM)
         {
             torque = 0;
         }
-        workdone = Mathf.Lerp(workdone, torque * angularVelocity * Time.deltaTime *3600/ 33526,Time.deltaTime);
-       
-        i = mass * radius * radius * 0.5f;
-        a = torque / i;
 
-        angularVelocity = angularVelocity + (a-eDrag*pumpingLosses.Evaluate(rpmT/maxRPM))*Time.deltaTime ;
-        rpmT = angularVelocity * 60 / (2* Mathf.PI);
+        powerTrain.engineTorque = engineTorque.Evaluate(rpm / maxRPM) * torque;
+            
+        idleTorque = Mathf.Max(0, idleManager.Update(idleRPM, rpm, Time.deltaTime));
+        torque = torque + idleTorque;        
+        a = torque / i;
+        engineVelocity = engineVelocity + (a-eDrag*pumpingLosses.Evaluate(rpm/maxRPM))*Time.deltaTime ;
+        powerTrainVelocity = powerTrain.engineRPM / 9.544f;
+        
+        slipValue = slipCurve.Evaluate(rpm/maxRPM);
+
+        slipVelocity = maxSlip * slipValue ; 
+      
+        engineVelocity =  Mathf.Lerp(engineVelocity, powerTrainVelocity + slipVelocity,PlayerInput.instance.throttle);
+
+        engineVelocity = Mathf.Max(engineVelocity, powerTrainVelocity);
+
+
+        // Linking engine to transmission;
+        rpm = (engineVelocity ) * 60 / (2* Mathf.PI);
+
+        //    workdone = Mathf.Lerp(workdone, torque * engineVelocity * Time.deltaTime * 3600 / 33526, Time.deltaTime * 5);
 
     }
 
     IEnumerator ShutdownEngine()
     {
-        while(angularVelocity>0) {
+        while(engineVelocity >0) {
             yield return null;
         }
         eDrag = 0;
-        angularVelocity = 0;
+        engineVelocity = 0;
     }
     
 }

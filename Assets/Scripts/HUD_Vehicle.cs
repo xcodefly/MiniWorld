@@ -49,7 +49,7 @@ public class HUD_Vehicle : MonoBehaviour
         {
             if(!testMode)
             {
-                rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpmT / engine.maxRPM, Time.deltaTime * 5);
+                rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpm / engine.maxRPM, Time.deltaTime * 5);
             }
            
             rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);

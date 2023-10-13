@@ -20,7 +20,7 @@ public class VehicleAction : MonoBehaviour
 
     void Start()
     {
-       
+        OnVehicleStart?.Invoke(running);  
     }
 
     // Update is called once per frame
