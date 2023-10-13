@@ -3206,7 +3206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRPM: 7000
-  idleRPM: 0
+  idleRPM: 750
   setRPM: 0
   allowedRPM: 0
   rpm: 0
@@ -3214,11 +3214,8 @@ MonoBehaviour:
     pFactor: 0.3
     iFactor: 0.015
     dFactor: 0.03
-  flywheelMass: 30
-  radius: 0.3
-  movementInertia: 0
   engineDrag: 0
-  w: 80
+  w: 0
   powerTrain: {fileID: 0}
   slipCurve:
     serializedVersion: 2
@@ -3254,6 +3251,47 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSlip: 0
+  idleManager:
+    pFactor: 2
+    iFactor: 0
+    dFactor: 0.01
+  maxTorque: 250
+  torque: 0
+  idleTorque: 0
+  a: 0
+  rpmT: 0
+  targetRPMT: 0
+  angularVelocity: 0
+  i: 0
+  workdone: 0
+  fuelBurn: 0
+  radius: 0.15
+  mass: 15
+  eDrag: 250
+  pumpingLosses:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.07763672
+      value: 0.9918518
+      inSlope: 0.14503604
+      outSlope: 0.14503604
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.09077
+    - serializedVersion: 3
+      time: 1.5009155
+      value: 1.9901085
+      inSlope: 1.5170276
+      outSlope: 1.5170276
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.051568527
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

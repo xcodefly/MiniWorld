@@ -25,6 +25,8 @@ public class HUD_Vehicle : MonoBehaviour
     [SerializeField] Slider fuelGauge;
 
 
+
+
     void Awake()
     {
         PowerTrain.OnGearChange += UpdateGear;
@@ -42,16 +44,17 @@ public class HUD_Vehicle : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         if(engine!=null)
         {
             if(!testMode)
             {
-                rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpm / engine.maxRPM, Time.deltaTime * 5);
+                rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpmT / engine.maxRPM, Time.deltaTime * 5);
             }
            
             rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);
             coolantNeedle.localEulerAngles=new Vector3(0, 0, coolant * coolantSweepAngle);
+         //   fuelGauge.value = engine.fuelQunatity / engine.fuelCapacity;
         }
                   
     }
