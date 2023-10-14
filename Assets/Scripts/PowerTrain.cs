@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Scripting;
+
 [System.Serializable]
 public class Gear
 {
@@ -20,7 +22,7 @@ public class PowerTrain : MonoBehaviour
 
     public Gear[] gears;
     public float finalGearRatio;
-    public float reversRatio;  
+    public Gear reverse;  
     public int gear;
     public PlayerInput playerInput;
     public VehicleController vehicleController;
@@ -45,8 +47,7 @@ public class PowerTrain : MonoBehaviour
             {
                 gear++;
             }
-            UpdateGear();
-           
+            UpdateGear();           
         }
         if(Input.GetButtonDown("GearDown"))
         {
@@ -55,10 +56,8 @@ public class PowerTrain : MonoBehaviour
                 gear--;
             }
             UpdateGear();
-        }
-        
+        }        
     }
-
     private void FixedUpdate()
     {
         engineRPM = vehicleController.wheelRPM * speedMultiplier;
@@ -72,9 +71,10 @@ public class PowerTrain : MonoBehaviour
             torqueMultiplier = gears[gear].torqueMultiplier * finalGearRatio;
             speedMultiplier = gears[gear].speedMultiplier * finalGearRatio;
         }
-        else
+        else if (gear ==-1)
         {
-            
+            torqueMultiplier = reverse.torqueMultiplier * finalGearRatio;
+            speedMultiplier = reverse.speedMultiplier * finalGearRatio;           
         }
         OnGearChange?.Invoke(gear);
     }

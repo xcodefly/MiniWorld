@@ -35,13 +35,10 @@ public class Engine : MonoBehaviour
     public float engineVelocity;
     public float powerTrainVelocity;
     public float i;
-    public float workdone;
-    
+    public float workdone;    
     public float fuelBurn; 
     public float radius, mass, eDrag;
     public AnimationCurve pumpingLosses;
-
-
     
     private void Awake()
     {
@@ -74,7 +71,7 @@ public class Engine : MonoBehaviour
     {   // Simulation.
         // v = u+at;
         // v2- u2= 2as;
-        
+
         torque = PlayerInput.instance.throttle * maxTorque;
              
         if(rpm>maxRPM)
@@ -82,23 +79,26 @@ public class Engine : MonoBehaviour
             torque = 0;
         }
 
-        powerTrain.engineTorque = engineTorque.Evaluate(rpm / maxRPM) * torque;
-            
+        powerTrain.engineTorque = engineTorque.Evaluate(rpm / maxRPM) * torque;            
         idleTorque = Mathf.Max(0, idleManager.Update(idleRPM, rpm, Time.deltaTime));
-        torque = torque + idleTorque;        
-        a = torque / i;
+        torque = torque + idleTorque;   
+        a =torque / i;
         engineVelocity = engineVelocity + (a-eDrag*pumpingLosses.Evaluate(rpm/maxRPM))*Time.deltaTime ;
-        powerTrainVelocity = powerTrain.engineRPM / 9.544f;
-        
+        powerTrainVelocity = powerTrain.engineRPM / 9.544f;        
         slipValue = slipCurve.Evaluate(rpm/maxRPM);
-
         slipVelocity = maxSlip * slipValue ; 
-      
-        engineVelocity =  Mathf.Lerp(engineVelocity, powerTrainVelocity + slipVelocity,PlayerInput.instance.throttle);
-
-        engineVelocity = Mathf.Max(engineVelocity, powerTrainVelocity);
-
-
+        if(powerTrain.gear>0)
+        {
+            powerTrainVelocity = powerTrain.engineRPM / 9.544f;
+            engineVelocity = Mathf.Lerp(engineVelocity, powerTrainVelocity + slipVelocity, PlayerInput.instance.throttle);
+            engineVelocity = Mathf.Max(engineVelocity, powerTrainVelocity);
+        }
+        else if (powerTrain.gear == -1)
+        {
+            powerTrainVelocity = - powerTrain.engineRPM / 9.544f;
+            engineVelocity = Mathf.Lerp(engineVelocity, powerTrainVelocity + slipVelocity, PlayerInput.instance.throttle);
+            engineVelocity = Mathf.Max(engineVelocity, powerTrainVelocity);
+        }
         // Linking engine to transmission;
         rpm = (engineVelocity ) * 60 / (2* Mathf.PI);
 
