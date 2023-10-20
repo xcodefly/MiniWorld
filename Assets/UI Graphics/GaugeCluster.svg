@@ -5,9 +5,9 @@
    viewBox="0 0 512 512.00002"
    version="1.1"
    id="svg839"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
    sodipodi:docname="GaugeCluster.svg"
-   inkscape:export-filename="C:\Users\HP USER\Documents\Unity\MiniWorld\Assets\UI Graphics\Gauge Car.png"
+   inkscape:export-filename="Fill Gauge.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -40,11 +40,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.9277948"
-     inkscape:cx="57.663613"
-     inkscape:cy="300.17413"
+     inkscape:zoom="1.8555896"
+     inkscape:cx="313.10803"
+     inkscape:cy="126.91384"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -80,12 +80,11 @@
        sodipodi:insensitive="true"
        inkscape:label="BackGround" />
     <circle
-       style="fill:#000000;fill-opacity:0.283951;stroke:none;stroke-width:1.21519;stroke-linecap:square;stroke-miterlimit:3.5;paint-order:markers fill stroke"
+       style="fill:#000000;fill-opacity:0.328846;stroke:#c7c7c7;stroke-width:1;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
        id="path2"
        cx="256"
        cy="256"
-       r="137.14285"
-       sodipodi:insensitive="true"
+       r="156.95842"
        inkscape:label="Inner Circle" />
     <circle
        style="fill:#000000;fill-opacity:0.1;stroke:none;stroke-width:0.105426;stroke-linecap:square;stroke-miterlimit:3.5;paint-order:markers fill stroke"
@@ -446,29 +445,29 @@
        width="137.90459"
        height="75"
        x="187.0477"
-       y="195.61729"
+       y="245.73613"
        ry="10"
        rx="10" />
     <path
-       style="display:inline;fill:none;fill-opacity:0.1;stroke:#bfbfbf;stroke-width:15;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95;paint-order:markers fill stroke"
+       style="display:inline;fill:none;fill-opacity:0.1;stroke:#909090;stroke-width:20;stroke-linecap:round;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.903846;paint-order:markers fill stroke"
        id="path6726"
        sodipodi:type="arc"
        sodipodi:cx="256"
        sodipodi:cy="256"
-       sodipodi:rx="215"
-       sodipodi:ry="215"
-       sodipodi:start="1.0471976"
-       sodipodi:end="2.0943951"
+       sodipodi:rx="137"
+       sodipodi:ry="137"
+       sodipodi:start="2.3561945"
+       sodipodi:end="3.9269908"
        sodipodi:arc-type="arc"
-       d="M 363.49999,442.19547 A 215,215 0 0 1 148.5,442.19546"
+       d="m 159.12637,352.87363 a 137,137 0 0 1 0,-193.74726"
        inkscape:label="Speed Arc"
        sodipodi:open="true" />
     <circle
-       style="fill:#808080;fill-opacity:0.75;fill-rule:evenodd;stroke:none;stroke-width:23.8055;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95"
+       style="fill:#808080;fill-opacity:0.75;fill-rule:evenodd;stroke:none;stroke-width:32.611;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95"
        id="path37666"
        cx="256"
-       cy="157.37906"
-       r="32.052704" />
+       cy="187.55815"
+       r="43.908775" />
     <path
        style="display:inline;fill:none;fill-opacity:0.1;stroke:#bfbfbf;stroke-width:5;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95;paint-order:markers fill stroke"
        id="path3"
@@ -485,7 +484,7 @@
        d="m 30.763637,295.71529 a 228.711,228.71123 0 0 1 99.557613,-230.800731 228.711,228.71123 0 0 1 251.3575,-3e-6 228.711,228.71123 0 0 1 99.55761,230.800734" />
     <g
        id="g50398"
-       transform="translate(19.606756,23.069305)">
+       transform="matrix(0.81094401,0,0,0.81094401,162.38035,-7.6660927)">
       <rect
          style="fill:#c3c3c3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:15;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95"
          id="rect47652"
@@ -531,19 +530,31 @@
          transform="scale(-1)" />
     </g>
     <path
-       style="display:inline;fill:none;fill-opacity:0.1;stroke:#00c45e;stroke-width:15;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.451745;paint-order:markers fill stroke"
-       id="path64869"
+       style="display:inline;fill:none;fill-opacity:0.1;stroke:#909090;stroke-width:20;stroke-linecap:round;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.903846;paint-order:markers fill stroke"
+       id="path4"
        sodipodi:type="arc"
        sodipodi:cx="256"
        sodipodi:cy="256"
-       sodipodi:rx="215"
-       sodipodi:ry="215"
-       sodipodi:start="1.4383108"
-       sodipodi:end="1.7008684"
+       sodipodi:rx="137"
+       sodipodi:ry="137"
+       sodipodi:start="5.4977871"
+       sodipodi:end="0.78539816"
        sodipodi:arc-type="arc"
-       d="m 284.40113,469.11587 a 215,215 0 0 1 -56.28784,0.0679"
+       d="M 352.87362,159.12637 A 137,137 0 0 1 393,256 137,137 0 0 1 352.87363,352.87363"
        inkscape:label="Speed Arc"
        sodipodi:open="true" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Circle">
+    <circle
+       style="display:inline;fill:none;fill-opacity:0.1;stroke:#f3f3f3;stroke-width:12;stroke-linecap:round;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.903846;paint-order:markers fill stroke"
+       id="path5"
+       inkscape:label="Speed Arc"
+       cx="256.26947"
+       cy="256.26947"
+       r="137.25548" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -659,24 +670,24 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;line-height:0;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#d9d9d9;fill-opacity:1"
-       x="179.96315"
-       y="410.27548"
+       x="201.51964"
+       y="367.16251"
        id="text6832"><tspan
          sodipodi:role="line"
          id="tspan6830"
-         x="179.96315"
-         y="410.27548"
+         x="201.51964"
+         y="367.16251"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#0000ff;fill-opacity:1">C</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;line-height:0;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#d9d9d9;fill-opacity:1"
-       x="352.45978"
-       y="417.05811"
+       x="199.63022"
+       y="164.52368"
        id="text6836"><tspan
          sodipodi:role="line"
          id="tspan6834"
-         x="352.45978"
-         y="417.05811"
+         x="199.63022"
+         y="164.52368"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ff0000;fill-opacity:1">H</tspan></text>
     <text
        xml:space="preserve"
@@ -703,28 +714,28 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;line-height:0;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#d9d9d9;fill-opacity:1"
-       x="171.78343"
-       y="344.31381"
+       x="336.15167"
+       y="371.79834"
        id="text51572"><tspan
          sodipodi:role="line"
          id="tspan51570"
-         x="171.78343"
-         y="344.31381"
+         x="336.15167"
+         y="371.79834"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#d9d9d9;fill-opacity:1">E</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;line-height:0;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#d9d9d9;fill-opacity:1"
-       x="360.29837"
-       y="344.31381"
+       x="340.89752"
+       y="156.23343"
        id="text51576"><tspan
          sodipodi:role="line"
          id="tspan51574"
-         x="360.29837"
-         y="344.31381"
+         x="340.89752"
+         y="156.23343"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#d9d9d9;fill-opacity:1">F</tspan></text>
     <g
        id="g64365"
-       transform="translate(24.641215,6.0970964)"
+       transform="translate(-73.97973,-169.04939)"
        style="fill:#cbcbcb;fill-opacity:1">
       <rect
          style="fill:#cbcbcb;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4.27365;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -772,39 +783,19 @@
          cy="441.84894"
          r="8.5740414" />
     </g>
-    <rect
-       style="fill:#bfbfbf;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.38728;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.95"
-       id="rect64389"
-       width="3.8106825"
-       height="23.406578"
-       x="342.06741"
-       y="291.57596"
-       rx="0.9999997"
-       ry="0.99999893"
-       transform="matrix(0.8643949,0.50281353,-0.50400888,0.86369847,0,0)" />
-    <rect
-       style="fill:#bfbfbf;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.38728;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.95"
-       id="rect68050"
-       width="3.8106825"
-       height="23.406578"
-       x="94.866211"
-       y="549.4895"
-       rx="0.9999997"
-       ry="0.99999893"
-       transform="matrix(0.86312553,-0.50498943,0.50379488,0.86382332,0,0)" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Needle"
-     style="display:none">
+     style="display:inline">
     <g
        id="g106"
        inkscape:label="Needle"
-       transform="translate(-0.57160277)"
-       style="display:none">
+       transform="matrix(1.0057428,0,0,0.88985954,-1.7722929,-5.4374352)"
+       style="display:inline">
       <path
-         style="opacity:0.95;fill:none;fill-opacity:0.492308;stroke:#f2f2f2;stroke-width:3;stroke-linecap:round;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95;paint-order:markers fill stroke;filter:url(#filter106)"
+         style="display:inline;opacity:0.95;fill:none;fill-opacity:0.492308;stroke:#f2f2f2;stroke-width:3;stroke-linecap:round;stroke-miterlimit:3.5;stroke-dasharray:none;stroke-opacity:0.95;paint-order:markers fill stroke;filter:url(#filter106)"
          id="circle106"
          inkscape:label="Inner Circle"
          transform="matrix(0.99367552,0,0,0.99367552,1.6190659,1.6190659)"
@@ -820,17 +811,9 @@
          sodipodi:open="true" />
       <path
          id="rect106"
-         style="fill:#f2f2f2;fill-opacity:0.95;stroke-width:2.94039;stroke-linecap:square;stroke-miterlimit:3.5;paint-order:markers fill stroke"
+         style="display:inline;fill:#f2f2f2;fill-opacity:0.95;stroke-width:2.94039;stroke-linecap:square;stroke-miterlimit:3.5;paint-order:markers fill stroke"
          d="m 250.54469,70.529451 5.74995,-32.508687 5.74995,32.387385 -0.88388,47.448991 h -9.73214 z"
          sodipodi:nodetypes="cccccc" />
     </g>
-    <path
-       id="rect16554"
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:3;stroke-linecap:square;stroke-miterlimit:3.5;stroke-dasharray:none"
-       d="m 256,32.962429 2,84.210041 h -4 z"
-       sodipodi:nodetypes="cccc"
-       inkscape:export-filename="C:\Users\HP USER\Documents\Unity\MiniWorld\Assets\UI Graphics\Temp Needle.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
   </g>
 </svg>

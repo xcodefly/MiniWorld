@@ -49,7 +49,7 @@ public class VehicleLights : MonoBehaviour
         {
             case 0:
                 marker = 0;
-                lights = 0.3f;
+                lights = 0.1f;
                 break;
             case 1:
                 marker = 0.5f;
@@ -74,7 +74,6 @@ public class VehicleLights : MonoBehaviour
         {
             brakeLight = 0;
         }            
-        brakeLights_Prefab_Material.SetColor("_EmissionColor", new Color(1f, 0, 0) * (brakeLight+marker));
-       
+        brakeLights_Material.SetColor("_EmissionColor", new Color(1f, 0, 0) * (brakeLight + marker)); 
     }
 }

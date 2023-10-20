@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform target;        // The target (character) to follow
     public float distance = 5.0f;
     public float distanceSmooth;   // Distance from the character
-    [SerializeField]float smoothSpeed =2;
+    [SerializeField]float smoothSpeed =10;
     public float zoomSpeed = 2.0f;  // Speed of zooming
     // Speed of camera rotation
    
@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
             mouseDelta=mouseDownPostion-(Vector2)Input.mousePosition;
             rotationAngle=rotationAngle-mouseDelta.x*0.2f;
             pitchAngle=pitchAngle+mouseDelta.y*0.1f;
-            pitchAngle=Mathf.Max(10,Mathf.Min(60,pitchAngle));
+            pitchAngle=Mathf.Max(10,Mathf.Min(45,pitchAngle));
             mouseDownPostion=Input.mousePosition;
         }
         if(Input.GetMouseButtonUp(1))
