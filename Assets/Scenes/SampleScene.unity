@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.119
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1967,7 +1967,7 @@ MonoBehaviour:
   MaxAngle: -175
   rpmsmooth: 3.23
   engine: {fileID: 2123871046}
-  coolant: 0.86
+  coolant: 0
   fuel: 0.344
   fuelGauge: {fileID: 227449524}
   coolantGauge: {fileID: 1716578868}
@@ -2801,9 +2801,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 515872809}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.119
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3659,25 +3659,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  slipValue: 0
-  slipVelocity: 0
-  maxSlip: 200
-  coolantMass: 0
-  coolantTemp: 0
+  specifitHeat: 1000
+  coolantMass: 1
+  coolantTemp: 60
+  coolantDelta: 0
+  thermostat: 0
+  radiaterCapacity: 150
+  targetValue: 50
   idleManager:
     pFactor: 0.3
     iFactor: 0
     dFactor: 0
   maxTorque: 250
   torque: 0
-  idleTorque: 0
-  a: 0
   rpm: 0
-  targetRPMT: 0
-  engineVelocity: 0
-  powerTrainVelocity: 0
-  i: 0
-  workdone: 0
   fuelBurn: 0
   radius: 0.15
   mass: 10

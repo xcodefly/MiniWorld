@@ -18,7 +18,7 @@ public class HUD_Vehicle : MonoBehaviour
     [SerializeField] Engine engine;
 
     [Header ("Engine Parameters")]
-    [Range(0,1)]
+    [Range(0,100)]
     [SerializeField] float coolant;
     [Range(0,1)]
     [SerializeField] float fuel;
@@ -28,6 +28,7 @@ public class HUD_Vehicle : MonoBehaviour
     void Awake()
     {
         PowerTrain.OnGearChange += UpdateGear;
+        Engine.OnEngineTemps+=UpdateEngineTemp;
 
         testMode = false;
     }
@@ -38,6 +39,8 @@ public class HUD_Vehicle : MonoBehaviour
     }
     private void OnDisable() {
         PowerTrain.OnGearChange -= UpdateGear;
+         Engine.OnEngineTemps-=UpdateEngineTemp;
+
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class HUD_Vehicle : MonoBehaviour
             rpmsmooth = Mathf.Lerp(rpmsmooth,engine.rpm,Time.deltaTime*7);
         }
         rpmNeedle.localEulerAngles = new Vector3(0,0,-rpmsmooth/8000*200);  
-        coolantGauge.value=coolant*0.25f;
+      //  coolantGauge.value=coolant*0.25f;
         fuelGauge.value=fuel*0.25f;
                   
     }
@@ -61,6 +64,10 @@ public class HUD_Vehicle : MonoBehaviour
             speed_T.text = (Mathf.Abs(vehicle.airspeed)*3.6f).ToString("0");
             yield return new WaitForSeconds(0.1f);
         }
+    }
+    void UpdateEngineTemp(float _temp)
+    {
+        coolantGauge.value=_temp*0.25f;
     }
     void UpdateGear(int _gear)
     {

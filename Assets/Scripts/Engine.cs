@@ -1,46 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.Properties;
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class Engine : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public static Action<float> OnEngineTemps;
 
     public float maxRPM;
     public float idleRPM;
     public float horsePower;
-
-   
-   
-
     [Header("Engine Parameters")]
     public PowerTrain powerTrain;
     public AnimationCurve slipCurve;
     public float rpmSlip;
     public AnimationCurve engineTorque;
-    public float slipValue;
-    public float slipVelocity;
-    public float maxSlip;
-
+    [Header("Coolant Management")]
+    public float specifitHeat;
     public float coolantMass;
-    public float coolantTemp;
-
+    public float coolantTemp,coolantDelta;
+    [Header("Radiater")]
+    public float thermostat;
+     public float radiaterCapacity;
+     public float targetValue;
     [Header("Speed Control")]
     public PID idleManager;
 
     [Header("Theromodynamic")]
     public float maxTorque;
-    public float torque,idleTorque;
-    public float a;
+    public float torque;
     public float rpm;
-    public float targetRPMT;
-    public float engineVelocity;
-    public float powerTrainVelocity;
-    public float i;
-    public float workdone;    
     public float fuelBurn; 
     public float radius, mass, eDrag;
     public AnimationCurve pumpingLosses;
@@ -48,9 +37,7 @@ public class Engine : MonoBehaviour
     private void Awake()
     {
         VehicleAction.OnVehicleStart += StartVehicle;
-        // old values
-        maxSlip=200;
-        i = mass * radius * radius*0.5f;
+        StartCoroutine(TransmitEngineTemp());
     }
     void Start()
     {
@@ -68,7 +55,7 @@ public class Engine : MonoBehaviour
         {
             idleRPM = 0;
             maxTorque = 0;
-            StartCoroutine(ShutdownEngine());
+       
         }
     }
 
@@ -84,53 +71,25 @@ public class Engine : MonoBehaviour
         rpm = powerTrain.engineRPM;
         rpm=Mathf.Clamp(rpm + rpmSlip,idleRPM,maxRPM+700);
         powerTrain.engineTorque=torque;
-
-
-        // Older method for createing power using engine RPM. 
-        /*
-
-        torque = PlayerInput.instance.throttle * maxTorque;
-             
-        if(rpm>maxRPM)
-        {
-            torque = 0;
-        }        
-
-        powerTrain.engineTorque = engineTorque.Evaluate(rpm / maxRPM) * torque;   
-         
-        idleTorque = Mathf.Max(0, idleManager.Update(idleRPM, rpm, Time.deltaTime));
-        torque = torque + idleTorque;   
-        a =torque / i;
-        engineVelocity = engineVelocity + (a-eDrag*pumpingLosses.Evaluate(rpm/maxRPM))*Time.deltaTime ;
-        powerTrainVelocity = powerTrain.engineRPM / 9.544f;        
-        slipValue = slipCurve.Evaluate(rpm/maxRPM);
-        slipVelocity = maxSlip * slipValue ; 
-        if(powerTrain.gear>0)
-        {
-            powerTrainVelocity = powerTrain.engineRPM / 9.544f;
-            engineVelocity = Mathf.Lerp(engineVelocity, powerTrainVelocity + slipVelocity, PlayerInput.instance.throttle);
-            engineVelocity = Mathf.Max(engineVelocity, powerTrainVelocity);
-        }
-        else if (powerTrain.gear == -1)
-        {
-            powerTrainVelocity = - powerTrain.engineRPM / 9.544f;
-            engineVelocity = Mathf.Lerp(engineVelocity, powerTrainVelocity + slipVelocity, PlayerInput.instance.throttle);
-            engineVelocity = Mathf.Max(engineVelocity, powerTrainVelocity);
-        }
-        // Linking engine to transmission;
-        rpm = (engineVelocity ) * 60 / (2* Mathf.PI);
-
-        //    workdone = Mathf.Lerp(workdone, torque * engineVelocity * Time.deltaTime * 3600 / 33526, Time.deltaTime * 5);
-        */
+        horsePower=torque*rpm/5252;
+        thermostat = Mathf.Lerp(0,2,(coolantTemp-targetValue)/15);
+      
+        coolantDelta = (((horsePower+15)*3-thermostat*radiaterCapacity)  *Time.fixedDeltaTime)/(coolantMass*specifitHeat);
+        coolantTemp=coolantTemp+coolantDelta;
     }
 
-    IEnumerator ShutdownEngine()
+    IEnumerator TransmitEngineTemp()
     {
-        while(engineVelocity >0) {
-            yield return null;
+        while (true)
+        {
+            yield return new WaitForSeconds (0.5f);
+
+            radiaterCapacity = 250 + VehicleController.instance.airspeed*4;
+            OnEngineTemps?.Invoke(coolantTemp);
+
+
         }
-        eDrag = 0;
-        engineVelocity = 0;
     }
     
+
 }

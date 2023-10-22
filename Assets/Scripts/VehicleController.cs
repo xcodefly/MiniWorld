@@ -9,7 +9,7 @@ public class VehicleController : MonoBehaviour
     // Actions.
  
     public static Action<bool> OnBrakeStatus;
-
+    public static VehicleController instance;
     // Start is called before the first frame update
     [SerializeField] WheelCollider [] steeringWheels;
     [SerializeField] WheelCollider [] driveWheels;
@@ -20,7 +20,6 @@ public class VehicleController : MonoBehaviour
     [SerializeField] Transform cog;
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput playerInput;
-    
   
     
     [SerializeField]int gear;
@@ -39,6 +38,7 @@ public class VehicleController : MonoBehaviour
         {
             rb.centerOfMass=cog.localPosition;
         }    
+        instance=this;
       
     }
     void Start()
