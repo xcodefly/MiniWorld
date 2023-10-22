@@ -19,9 +19,9 @@ public class Engine : MonoBehaviour
     public float specifitHeat;
     public float coolantMass;
     public float coolantTemp,coolantDelta;
-    [Header("Radiater")]
+    [Header("Radioter")]
     public float thermostat;
-     public float radiaterCapacity;
+     public float radiatorCapacity;
      public float targetValue;
     [Header("Speed Control")]
     public PID idleManager;
@@ -30,8 +30,6 @@ public class Engine : MonoBehaviour
     public float maxTorque;
     public float torque;
     public float rpm;
-    public float fuelBurn; 
-    public float radius, mass, eDrag;
     public AnimationCurve pumpingLosses;
     
     private void Awake()
@@ -47,8 +45,7 @@ public class Engine : MonoBehaviour
     {
         if(_status )
         {
-            idleRPM = 750;
-            eDrag = 300;
+            idleRPM = 750;        
             maxTorque = 300;
         }
         else
@@ -74,7 +71,7 @@ public class Engine : MonoBehaviour
         horsePower=torque*rpm/5252;
         thermostat = Mathf.Lerp(0,2,(coolantTemp-targetValue)/15);
       
-        coolantDelta = (((horsePower+15)*3-thermostat*radiaterCapacity)  *Time.fixedDeltaTime)/(coolantMass*specifitHeat);
+        coolantDelta = (((horsePower+15)*3-thermostat*radiatorCapacity)  *Time.fixedDeltaTime)/(coolantMass*specifitHeat);
         coolantTemp=coolantTemp+coolantDelta;
     }
 
@@ -84,10 +81,8 @@ public class Engine : MonoBehaviour
         {
             yield return new WaitForSeconds (0.5f);
 
-            radiaterCapacity = 250 + VehicleController.instance.airspeed*4;
+            radiatorCapacity = 300 + VehicleController.instance.airspeed*4;
             OnEngineTemps?.Invoke(coolantTemp);
-
-
         }
     }
     
