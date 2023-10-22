@@ -1961,11 +1961,11 @@ MonoBehaviour:
   vehicle: {fileID: 2123871034}
   speed_T: {fileID: 812471963}
   gear_T: {fileID: 1431505157}
-  testMode: 0
+  testMode: 1
   rpmNeedle: {fileID: 1191894447}
-  ratio: 0
+  ratio: 3.37
   MaxAngle: -175
-  rpmsmooth: 0
+  rpmsmooth: 3.23
   engine: {fileID: 2123871046}
   coolant: 0.86
   fuel: 0.344
@@ -3529,20 +3529,20 @@ MonoBehaviour:
   gears:
   - speedMultiplier: 0
     torqueMultiplier: 0
-  - speedMultiplier: 4.5
-    torqueMultiplier: 2.7
-  - speedMultiplier: 2.5
-    torqueMultiplier: 2.3
-  - speedMultiplier: 1.5
-    torqueMultiplier: 2
-  - speedMultiplier: 1
+  - speedMultiplier: 4.2
+    torqueMultiplier: 2.1
+  - speedMultiplier: 2.9
+    torqueMultiplier: 1.9
+  - speedMultiplier: 2.1
     torqueMultiplier: 1.7
-  - speedMultiplier: 0.7
+  - speedMultiplier: 1.4
     torqueMultiplier: 1.4
-  finalGearRatio: 2.1
+  - speedMultiplier: 1
+    torqueMultiplier: 1.1
+  finalGearRatio: 3
   reverse:
-    speedMultiplier: 4
-    torqueMultiplier: -1.8
+    speedMultiplier: -3.9
+    torqueMultiplier: -1.6
   gear: 0
   playerInput: {fileID: 743064230}
   vehicleController: {fileID: 0}
@@ -3563,46 +3563,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxRPM: 7000
   idleRPM: 750
+  horsePower: 0
   powerTrain: {fileID: 0}
   slipCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1.002533
-      inSlope: -1.837771
-      outSlope: -1.837771
+      time: -0.0025195032
+      value: 1.1116307
+      inSlope: -4.056751
+      outSlope: -4.056751
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.025312075
+      outWeight: 0.08765117
     - serializedVersion: 3
-      time: 0.99902344
-      value: -0.0002746582
-      inSlope: -0.07222796
-      outSlope: -0.07222796
+      time: 0.20257069
+      value: 0.42479542
+      inSlope: -2.7900503
+      outSlope: -2.7900503
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.06588778
+      inWeight: 0.33333334
+      outWeight: 0.1342348
+    - serializedVersion: 3
+      time: 0.3289296
+      value: 0.18621406
+      inSlope: -1.033536
+      outSlope: -1.033536
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.038698204
+    - serializedVersion: 3
+      time: 0.99902344
+      value: 0.002319336
+      inSlope: 0.10091152
+      outSlope: 0.10091152
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3771935
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  rpmSlip: 0
   engineTorque:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0031986237
-      value: 0.86486053
-      inSlope: 0.16047335
-      outSlope: 0.16047335
+      time: -0.00008583069
+      value: 0.7707443
+      inSlope: 0.41371757
+      outSlope: 0.41371757
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.13700736
-      value: 0.88735986
+      time: 0.5537554
+      value: 0.99987817
       inSlope: 0.13250399
       outSlope: 0.13250399
       tangentMode: 0
@@ -3610,8 +3630,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.03270398
     - serializedVersion: 3
-      time: 0.95604366
-      value: 0.8365516
+      time: 0.8846325
+      value: 0.99408334
       inSlope: -0.2188981
       outSlope: -0.2188981
       tangentMode: 0
@@ -3619,19 +3639,19 @@ MonoBehaviour:
       inWeight: 0.04693173
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0050187
-      value: 0.7232219
-      inSlope: -5.66494
-      outSlope: -5.66494
+      time: 1.0195451
+      value: 0.56099045
+      inSlope: -5.7654524
+      outSlope: -5.7654524
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0297852
-      value: 0.49993134
-      inSlope: -9.01585
-      outSlope: -9.01585
+      time: 1.1013184
+      value: -0.11942291
+      inSlope: -8.320729
+      outSlope: -8.320729
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -3642,6 +3662,8 @@ MonoBehaviour:
   slipValue: 0
   slipVelocity: 0
   maxSlip: 200
+  coolantMass: 0
+  coolantTemp: 0
   idleManager:
     pFactor: 0.3
     iFactor: 0
@@ -3759,10 +3781,10 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 1689545858}
   - {fileID: 743064231}
-  - {fileID: 2010641715}
   - {fileID: 1247555193}
   - {fileID: 1023544978}
   - {fileID: 1091752139}
   - {fileID: 1879017646}
   - {fileID: 2087391963}
   - {fileID: 8589921085914625441}
+  - {fileID: 2010641715}

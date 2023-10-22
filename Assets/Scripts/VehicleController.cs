@@ -83,11 +83,12 @@ public class VehicleController : MonoBehaviour
                 wheel.steerAngle=playerInput.steer*maxSteerAngle;
             }
             wheelRPM = 0;
-           foreach (WheelCollider wheel in driveWheels)
-                {
+            foreach (WheelCollider wheel in driveWheels)
+            {
                 wheelRPM = wheelRPM + wheel.rpm;
                 wheel.motorTorque = torque / driveWheels.Length;
             }
+            wheelRPM=wheelRPM/driveWheels.Length;
         }           
          //   wheelSpeed = engineRPM  * 2 * Mathf.PI * driveWheels[0].radius / driveWheels.Length * Time.fixedDeltaTime;
         float brakeForce = brake * brakeTorque;

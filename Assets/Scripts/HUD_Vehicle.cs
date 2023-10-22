@@ -43,17 +43,14 @@ public class HUD_Vehicle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(engine!=null)
+
+        if(!testMode)
         {
-            if(!testMode)
-            {
-                rpmsmooth = Mathf.Lerp(rpmsmooth, engine.rpm / engine.maxRPM, Time.deltaTime * 5);
-            }
-           
-            rpmNeedle.localEulerAngles = new Vector3(0, 0, rpmsmooth * MaxAngle);
-            coolantGauge.value=coolant*0.25f;
-            fuelGauge.value=fuel*0.25f;
+            rpmsmooth = Mathf.Lerp(rpmsmooth,engine.rpm,Time.deltaTime*7);
         }
+        rpmNeedle.localEulerAngles = new Vector3(0,0,-rpmsmooth/8000*200);  
+        coolantGauge.value=coolant*0.25f;
+        fuelGauge.value=fuel*0.25f;
                   
     }
 

@@ -11,6 +11,7 @@ public class Engine : MonoBehaviour
 
     public float maxRPM;
     public float idleRPM;
+    public float horsePower;
 
    
    
@@ -18,10 +19,14 @@ public class Engine : MonoBehaviour
     [Header("Engine Parameters")]
     public PowerTrain powerTrain;
     public AnimationCurve slipCurve;
+    public float rpmSlip;
     public AnimationCurve engineTorque;
     public float slipValue;
     public float slipVelocity;
     public float maxSlip;
+
+    public float coolantMass;
+    public float coolantTemp;
 
     [Header("Speed Control")]
     public PID idleManager;
@@ -43,6 +48,7 @@ public class Engine : MonoBehaviour
     private void Awake()
     {
         VehicleAction.OnVehicleStart += StartVehicle;
+        // old values
         maxSlip=200;
         i = mass * radius * radius*0.5f;
     }
@@ -54,7 +60,7 @@ public class Engine : MonoBehaviour
     {
         if(_status )
         {
-            idleRPM = 850;
+            idleRPM = 750;
             eDrag = 300;
             maxTorque = 300;
         }
@@ -68,18 +74,30 @@ public class Engine : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {   // Simulation.
-        // v = u+at;
-        // v2- u2= 2as;
+    {   
+
+        torque = engineTorque.Evaluate(rpm/maxRPM  )*maxTorque*  PlayerInput.instance.throttle;
+       
+        // allowing slip for realistic rpm jump.
+        
+        rpmSlip=Mathf.Lerp(rpmSlip,slipCurve.Evaluate(rpm/maxRPM)*maxRPM*PlayerInput.instance.throttle,Time.deltaTime*3);
+        rpm = powerTrain.engineRPM;
+        rpm=Mathf.Clamp(rpm + rpmSlip,idleRPM,maxRPM+700);
+        powerTrain.engineTorque=torque;
+
+
+        // Older method for createing power using engine RPM. 
+        /*
 
         torque = PlayerInput.instance.throttle * maxTorque;
              
         if(rpm>maxRPM)
         {
             torque = 0;
-        }
+        }        
 
-        powerTrain.engineTorque = engineTorque.Evaluate(rpm / maxRPM) * torque;            
+        powerTrain.engineTorque = engineTorque.Evaluate(rpm / maxRPM) * torque;   
+         
         idleTorque = Mathf.Max(0, idleManager.Update(idleRPM, rpm, Time.deltaTime));
         torque = torque + idleTorque;   
         a =torque / i;
@@ -103,7 +121,7 @@ public class Engine : MonoBehaviour
         rpm = (engineVelocity ) * 60 / (2* Mathf.PI);
 
         //    workdone = Mathf.Lerp(workdone, torque * engineVelocity * Time.deltaTime * 3600 / 33526, Time.deltaTime * 5);
-
+        */
     }
 
     IEnumerator ShutdownEngine()
