@@ -1,74 +1,104 @@
 using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;        // The target (character) to follow
-    public float distance = 5.0f;
-    public float distanceSmooth;   // Distance from the character
-    [SerializeField]float smoothSpeed =10;
-    public float zoomSpeed = 2.0f;  // Speed of zooming
-    // Speed of camera rotation
-   
+    public Transform player;    // The target (character) to follow
+    public float zoomDistance = -8.0f;
+    // Distance from the character
+    [SerializeField]float smoothSpeed =20;
+    public float zoomSpeed = 0.5f;  // Speed of zooming
+    // Speed of camera rotation   
     [SerializeField] Vector2 mouseDownPostion,mouseDelta;  
-    [SerializeField] float rotationAngle,pitchAngle;
-    [SerializeField]Quaternion rotationSmooth;
-    private void Start() {
+    [SerializeField] float rotationAngle,pitchAngle;  
+    [SerializeField]Camera cam;    
+    [SerializeField]Vector2 mousePositionStart;
+    [SerializeField]float camHeight,camOffest,camDistance,viewTilt,viewRotate;
+
+    private void Awake()
+    {
+        Application.targetFrameRate=60;
+        player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+    }
+    private void Start() 
+    {
         rotationAngle=  PlayerPrefs.GetFloat("Rotation", 0);
         pitchAngle=  PlayerPrefs.GetFloat("Angle", 20);
-        distance=  PlayerPrefs.GetFloat("Distance", 10);
-        distanceSmooth=distance;
+        zoomDistance=  PlayerPrefs.GetFloat("zoomDistance", 10);      
+        LoadCamPostion();
+        CalculateCamPosition();
     }
-  
-    private void LateUpdate()
+
+     void Update()
     {
-        if (target == null)
-            return;
-
-        // Calculate the desired position for the camera
-        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-        distance -= zoomInput * zoomSpeed * Time.fixedDeltaTime;
-        float desiredRotationAngle = target.eulerAngles.y;
-
-        // Calculate zoom input
-       
-        distanceSmooth=Mathf.Lerp(distanceSmooth,distance,Time.deltaTime *smoothSpeed);
-
-        // Calculate rotation input
-        if(Input.mouseScrollDelta.y!=0)
+        if(Input.mouseScrollDelta.y!=0 )
         {
-            PlayerPrefs.SetFloat("Distance", distance);
-           
+           // if(Input.GetMouseButtonDown(1))
+         //   {   
+                zoomDistance=zoomDistance-Input.mouseScrollDelta.y*zoomSpeed;
+                zoomDistance=Mathf.Max(5,Mathf.Min(15,zoomDistance));
+            
+                CalculateCamPosition();
+        //    }
+          
         }
-
+        
         if(Input.GetMouseButtonDown(1))
         {
-            mouseDownPostion=Input.mousePosition;
+            mousePositionStart=Input.mousePosition;
         }
         if(Input.GetMouseButton(1))
         {
-            mouseDelta=mouseDownPostion-(Vector2)Input.mousePosition;
-            rotationAngle=rotationAngle-mouseDelta.x*0.2f;
-            pitchAngle=pitchAngle+mouseDelta.y*0.1f;
-            pitchAngle=Mathf.Max(10,Mathf.Min(45,pitchAngle));
-            mouseDownPostion=Input.mousePosition;
+            mouseDelta =mousePositionStart-(Vector2)Input.mousePosition;
+            viewTilt = viewTilt + mouseDelta.y*0.3f;
+            viewTilt=Mathf.Max(10,Mathf.Min(45,viewTilt));
+
+            viewRotate = viewRotate +mouseDelta.x*0.25f;
+            mousePositionStart=Input.mousePosition;
+            CalculateCamPosition();
         }
+
         if(Input.GetMouseButtonUp(1))
         {
-            PlayerPrefs.SetFloat("Rotation", rotationAngle);
-            PlayerPrefs.SetFloat("Angle", pitchAngle);        
-        }  
-        // Calculate desired position
-        Quaternion rotation = Quaternion.Euler(pitchAngle, rotationAngle+target.eulerAngles.y, 0) ;
-        rotationSmooth=Quaternion.Lerp(rotationSmooth,rotation  ,Time.deltaTime *smoothSpeed);
-        Vector3 offset = new Vector3(0, 0, -distanceSmooth);
-        transform.position = target.position + rotationSmooth * offset;
+            mousePositionStart=Vector2.zero;
+            
+        }
 
-        // Smoothly move the camera
-        //  transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
-
-        // Make the camera look at the target
-        transform.LookAt(target);
     }
+    void SaveCamPosition()
+    {
+        PlayerPrefs.SetFloat("zoomDistance",zoomDistance);
+        PlayerPrefs.SetFloat("viewTilt",viewTilt);
+        PlayerPrefs.SetFloat("viewRotate",viewRotate);
+    }
+    void LoadCamPostion()
+    {
+        zoomDistance= PlayerPrefs.GetFloat("zoomDistance",10);
+        viewTilt=PlayerPrefs.GetFloat("viewTilt",15);
+        viewRotate=PlayerPrefs.GetFloat("viewRotate",0);
+    }
+    void CalculateCamPosition()
+    {
+        camHeight = zoomDistance*Mathf.Sin(viewTilt*Mathf.Deg2Rad);
+        camOffest=zoomDistance*Mathf.Sin(viewRotate*Mathf.Deg2Rad);
+        camDistance = zoomDistance*Mathf.Cos(viewTilt*Mathf.Deg2Rad);
+        camDistance=camDistance*Mathf.Cos(viewRotate*Mathf.Deg2Rad);   
+    }
+   
+    private void LateUpdate()
+    {
+        cam.transform.position=Vector3.Lerp(cam.transform.position, player.position  + player.TransformDirection(camOffest,camHeight,-camDistance) ,Time.deltaTime*smoothSpeed);
+        cam.transform.LookAt(player.position,Vector3.up);
+    }
+    IEnumerator CenterViewC()
+    {
+        while(Mathf.Abs(rotationAngle)>0.1)
+        {
+            rotationAngle = Mathf.Lerp(rotationAngle, 0, Time.deltaTime*10);
+            yield return null;
+        }
+    }
+    
 }
